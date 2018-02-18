@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/afterfocus_delisus"
+    tools:context="com.example.dakaku.delisus.ui.MainActivity">
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="389dp"
+       app:layout_constraintBottom_toTopOf="@id/textView_main_signIn"
+       android:layout_marginBottom="40dp">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentTop="true" />
+
+    <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/circle_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true" />
+
+   </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView_main_signUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="New User? Sign Up here"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_main_signIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/textstyleselector"
+        android:gravity="center"
+        style="@style/Widget.AppCompat.Button"
+        android:text="Sign in with Email"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toTopOf="@id/textView_main_signUp" />
+
+</android.support.constraint.ConstraintLayout>

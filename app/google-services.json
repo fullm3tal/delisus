@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "689312717823",
+    "firebase_url": "https://delisus-12683.firebaseio.com",
+    "project_id": "delisus-12683",
+    "storage_bucket": "delisus-12683.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689312717823:android:ca84106be2697c5f",
+        "android_client_info": {
+          "package_name": "com.example.dakaku.delisus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "689312717823-n8emuit5tpf5fh1qeh1t2heqr3gbvm19.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuPvg22ACv_myacIiovs9qaHNQ3f8JJIs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

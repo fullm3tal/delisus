@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Delisus</string>
+    <string name="login_id">Email</string>
+    <string name="login_password">Password</string>
+    <string name="login_confirmPassword">Re-type Password</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="username">Username</string>
+    <string name="newUser_login">Already have an account? Login</string>
+    <string name="newUser_register">Register</string>
+    <string name="sign_out">Sign out</string>
+    <string name="sign_out_yes">Yes</string>
+    <string name="sign_out_no">No</string>
+</resources>
