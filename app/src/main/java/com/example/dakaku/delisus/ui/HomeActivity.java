@@ -33,11 +33,11 @@ public class HomeActivity extends AppCompatActivity {
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mViewPager = (ViewPager) findViewById(R.id.viewPager_home);
 
+
         setUpViewPager(mViewPager);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabsLayout_home);
         tabLayout.setupWithViewPager(mViewPager);
-
 
     }
 

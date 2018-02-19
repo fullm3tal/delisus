@@ -17,15 +17,13 @@ import com.example.dakaku.delisus.R;
 public class TrackerFragment extends Fragment {
 
     private static final String TAG = "TrackerFragment";
-    TextView textView_tracker;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
        View view=inflater.inflate(R.layout.tracker_fragment,container,false);
 
-        textView_tracker= (TextView) view.findViewById(R.id.tvTracker_fragment);
-        textView_tracker.setText(TAG);
+
 
         return view;
 
