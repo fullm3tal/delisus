@@ -12,7 +12,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.dakaku.delisus.Adapters.CustomSwipeAdapter;
+import com.example.dakaku.delisus.Adapters.CustomSliderAdapter;
 import com.example.dakaku.delisus.R;
 
 import java.util.Timer;
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.circle_indicator)
     CircleIndicator indicator;
 
- public CustomSwipeAdapter customSwipeAdapter;
+ public CustomSliderAdapter customSliderAdapter;
 
 
  private static int currentPage=0;
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(getSupportActionBar()!=null){
             getSupportActionBar().hide();
         }
-        customSwipeAdapter=new CustomSwipeAdapter(this);
+        customSliderAdapter =new CustomSliderAdapter(this);
         setImageSlider();
 
         textViewMainSignIn.setOnClickListener(this);
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setImageSlider() {
 
-       viewPager.setAdapter(customSwipeAdapter);
+       viewPager.setAdapter(customSliderAdapter);
        indicator.setViewPager(viewPager);
 
        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

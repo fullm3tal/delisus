@@ -3,6 +3,7 @@ package com.example.dakaku.delisus.Adapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +12,14 @@ import java.util.List;
  * Created by dakaku on 16/2/18.
  */
 
-public class CustomTabAdapter extends FragmentPagerAdapter {
+public class CustomFragmentAdapter extends FragmentPagerAdapter {
 
     List<Fragment> mFragmentList=new ArrayList<>();
     List<String> mFragmentTitleList=new ArrayList<>();
 
-    public CustomTabAdapter(FragmentManager fm) {
+    public CustomFragmentAdapter(FragmentManager fm) {
         super(fm);
+
     }
 
     public void addFragment(Fragment fragment, String title){

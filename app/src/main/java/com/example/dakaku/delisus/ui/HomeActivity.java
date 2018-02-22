@@ -7,12 +7,13 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toolbar;
+import android.view.View;
 
-import com.example.dakaku.delisus.Adapters.CustomTabAdapter;
+import com.example.dakaku.delisus.Adapters.CustomFragmentAdapter;
 import com.example.dakaku.delisus.R;
 import com.example.dakaku.delisus.frags.FavoriteFragment;
 import com.example.dakaku.delisus.frags.NewsFragment;
@@ -32,24 +33,25 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-       mViewPager = (ViewPager) findViewById(R.id.viewPager_home);
-
-       TabLayout tabLayout = (TabLayout) findViewById(R.id.tabsLayout_home);
-        tabLayout.setupWithViewPager(mViewPager);
+        mViewPager = findViewById(R.id.viewPager_home);
 
         setUpViewPager(mViewPager);
+
+        TabLayout tabLayout = findViewById(R.id.tabsLayout_home);
+        tabLayout.setupWithViewPager(mViewPager);
 
     }
 
     private void setUpViewPager(ViewPager mViewPager) {
 
-        CustomTabAdapter adapter = new CustomTabAdapter(getSupportFragmentManager());
+        CustomFragmentAdapter adapter = new CustomFragmentAdapter(getSupportFragmentManager());
 
         adapter.addFragment(new TrackerFragment(), "Calorie Tracker");
         adapter.addFragment(new NewsFragment(), "News");
         adapter.addFragment(new FavoriteFragment(), "Favorites");
 
         mViewPager.setAdapter(adapter);
+        Log.v("ViewClass","setUpViewPager");
     }
 
     @Override
@@ -78,6 +80,7 @@ public class HomeActivity extends AppCompatActivity {
                         }).setNegativeButton(R.string.sign_out_no, null).create().show();
                 return true;
 
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -99,4 +102,5 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 }).setNegativeButton(R.string.sign_out_no, null).create().show();
     }
+
 }

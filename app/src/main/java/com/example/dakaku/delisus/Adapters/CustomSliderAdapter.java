@@ -15,7 +15,7 @@ import com.example.dakaku.delisus.R;
  * Created by dakaku on 31/1/18.
  */
 
-public class CustomSwipeAdapter extends PagerAdapter {
+public class CustomSliderAdapter extends PagerAdapter {
 
     private static final String TAG = "CustomSwipeAdapter";
 
@@ -28,7 +28,7 @@ public class CustomSwipeAdapter extends PagerAdapter {
     private Context mContext;
     private LayoutInflater inflater;
 
-   public CustomSwipeAdapter(Context context){
+   public CustomSliderAdapter(Context context){
         super();
         mContext=context;
     }

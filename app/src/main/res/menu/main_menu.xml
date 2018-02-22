@@ -8,5 +8,8 @@
         app:showAsAction="never"
         />
 
+<item android:id="@+id/lone_fragment"
+    android:title="Frags"
+    app:showAsAction="never"/>
 
 </menu>

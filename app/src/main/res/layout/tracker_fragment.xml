@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -16,7 +16,7 @@
             <android.support.v7.widget.CardView
                 android:id="@+id/cardView1"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="10dp"
@@ -44,20 +44,26 @@
                         app:layout_constraintRight_toRightOf="parent" />
 
                     <ImageView
+                        android:id="@+id/image_breakfast"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="200dp"
                         android:src="@drawable/first"
                         app:layout_constraintTop_toBottomOf="@id/tv_breakfast" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" + Add Food"
+                        app:layout_constraintTop_toBottomOf="@id/image_breakfast" />
 
                 </android.support.constraint.ConstraintLayout>
 
             </android.support.v7.widget.CardView>
 
-
             <android.support.v7.widget.CardView
                 android:id="@+id/cardView2"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="match_parent"
                 android:layout_margin="16dp"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="10dp"
@@ -86,19 +92,25 @@
                         app:layout_constraintRight_toRightOf="parent" />
 
                     <ImageView
+                        android:id="@+id/image_lunch"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="200dp"
                         android:src="@drawable/second"
                         app:layout_constraintTop_toBottomOf="@id/tv_lunch" />
 
-                </android.support.constraint.ConstraintLayout>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" + Add Food"
+                        app:layout_constraintTop_toBottomOf="@id/image_lunch" />
 
+                </android.support.constraint.ConstraintLayout>
 
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="match_parent"
                 android:layout_margin="16dp"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="10dp"
@@ -119,7 +131,6 @@
                         android:padding="16dp"
                         android:text="Dinner" />
 
-
                     <TextView
                         android:id="@+id/tv_dinnerCalorie"
                         android:layout_width="wrap_content"
@@ -129,14 +140,19 @@
                         app:layout_constraintRight_toRightOf="parent" />
 
                     <ImageView
+                        android:id="@+id/image_dinner"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="200dp"
                         android:src="@drawable/third"
                         app:layout_constraintTop_toBottomOf="@id/tv_dinner" />
 
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" + Add Food"
+                        app:layout_constraintTop_toBottomOf="@id/image_dinner" />
 
                 </android.support.constraint.ConstraintLayout>
-
 
             </android.support.v7.widget.CardView>
 
@@ -144,4 +160,4 @@
 
     </android.support.v4.widget.NestedScrollView>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
