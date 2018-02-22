@@ -8,49 +8,41 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:layout_height="256dp"
+        android:theme="@style/Theme.AppCompat.NoActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_scrollFlags="exitUntilCollapsed"
+            android:background="@drawable/lucky3"
             app:contentScrim="@color/colorPrimary"
-            app:title="Title"
-            app:expandedTitleMarginStart="48dp"
             app:expandedTitleMarginEnd="64dp"
-            android:background="@drawable/lucky3">
+            app:expandedTitleMarginStart="48dp"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="exitUntilCollapsed|scroll">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="parallax"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
             <android.support.design.widget.TabLayout
+                android:id="@+id/tabsLayout_home"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                app:tabMode="scrollable"
-                app:tabContentStart="72dp"
-                android:id="@+id/tabsLayout_home" />
-            
-            <android.support.v7.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="parallax"/>
+                app:tabMode="scrollable" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
-
-        <android.support.v4.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_behaviour="@string">
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewPager_home"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-
-        </android.support.v4.widget.NestedScrollView>
-
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     </android.support.design.widget.AppBarLayout>
-
 
 </android.support.design.widget.CoordinatorLayout>

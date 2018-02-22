@@ -16,14 +16,16 @@ import com.example.dakaku.delisus.R;
 
 public class TrackerFragment extends Fragment {
 
+    public TrackerFragment(){
+
+    }
+
     private static final String TAG = "TrackerFragment";
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
        View view=inflater.inflate(R.layout.tracker_fragment,container,false);
-
-
 
         return view;
 

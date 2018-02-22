@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toolbar;
 
 import com.example.dakaku.delisus.Adapters.CustomTabAdapter;
 import com.example.dakaku.delisus.R;
@@ -31,13 +32,12 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        mViewPager = (ViewPager) findViewById(R.id.viewPager_home);
+       mViewPager = (ViewPager) findViewById(R.id.viewPager_home);
 
+       TabLayout tabLayout = (TabLayout) findViewById(R.id.tabsLayout_home);
+        tabLayout.setupWithViewPager(mViewPager);
 
         setUpViewPager(mViewPager);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabsLayout_home);
-        tabLayout.setupWithViewPager(mViewPager);
 
     }
 
