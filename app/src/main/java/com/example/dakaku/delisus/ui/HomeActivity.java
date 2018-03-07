@@ -7,11 +7,9 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.dakaku.delisus.Adapters.CustomFragmentAdapter;
 import com.example.dakaku.delisus.R;
@@ -32,6 +30,10 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.app_bar_main);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mViewPager = findViewById(R.id.viewPager_home);
 
@@ -51,7 +53,6 @@ public class HomeActivity extends AppCompatActivity {
         adapter.addFragment(new FavoriteFragment(), "Favorites");
 
         mViewPager.setAdapter(adapter);
-        Log.v("ViewClass","setUpViewPager");
     }
 
     @Override
