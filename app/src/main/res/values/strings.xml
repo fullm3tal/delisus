@@ -10,6 +10,6 @@
     <string name="sign_out">Sign out</string>
     <string name="sign_out_yes">Yes</string>
     <string name="sign_out_no">No</string>
-    <string name="search_hint">Search My Search</string>
+    <string name="search_hint">Search me Food</string>
     <string name="app_label">Delisus</string>
 </resources>
