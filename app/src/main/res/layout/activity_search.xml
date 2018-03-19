@@ -11,25 +11,25 @@
         layout="@layout/app_bar_search" />
 
     <LinearLayout
+        android:id="@+id/layout_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/app_searchBar">
 
         <android.support.v7.widget.SearchView
             android:id="@+id/search_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:iconifiedByDefault="false" />
 
     </LinearLayout>
 
+   <android.support.v7.widget.RecyclerView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/rv_searchActivity"
+       app:layout_constraintTop_toBottomOf="@id/layout_search"/>
 
-    <!--<EditText-->
-        <!--android:layout_width="280dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:layout_constraintLeft_toRightOf="@id/search_view"-->
-        <!--app:layout_constraintTop_toBottomOf="@id/app_searchBar"-->
-        <!--android:hint="Search food or Brand"/>-->
 
 </android.support.constraint.ConstraintLayout>

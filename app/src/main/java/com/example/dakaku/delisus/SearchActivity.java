@@ -1,25 +1,43 @@
 package com.example.dakaku.delisus;
 
 import android.app.SearchManager;
-import android.app.SearchableInfo;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
+
+import com.example.dakaku.delisus.Adapters.CustomSearchAdapter;
+import com.example.dakaku.delisus.Network.RetrofitApi;
+import com.example.dakaku.delisus.Network.RetrofitClient;
+import com.example.dakaku.delisus.Pojo.FoodApiHits;
+import com.example.dakaku.delisus.Pojo.FoodData;
+import com.example.dakaku.delisus.Pojo.Recipe;
+import com.example.dakaku.delisus.ui.MainActivity;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private static final String TAG = "SearchActivity";
 
     @BindView(R.id.search_view)
-    SearchView searchView;
+     SearchView searchView;
+
+    @BindView(R.id.rv_searchActivity)
+     RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +45,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
 
-        Toolbar toolbar=findViewById(R.id.app_searchBar);
+        Toolbar toolbar = findViewById(R.id.app_searchBar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -38,21 +56,24 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
         //Setting up the SearchableInfo
-        SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
+        final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnQueryTextListener(this);
 
     }
 
-
-    //onNewIntent() is used to display the voice response received from the voiceSearchButton into SearchView
-
+    //onNewIntent() is used to display the data received from the voiceSearchButton into SearchView
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        if(Intent.ACTION_SEARCH.equals(intent.getAction())){
-            String extraQuery=intent.getStringExtra(SearchManager.QUERY);
-            searchView.setQuery(String.valueOf(extraQuery),false);
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String extraQuery = intent.getStringExtra(SearchManager.QUERY);
+            searchView.setQuery(String.valueOf(extraQuery), false);
         }
     }
 
@@ -60,5 +81,47 @@ public class SearchActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    public void getDataFromApi(String newText) {
+
+        RetrofitApi retrofitApi = RetrofitClient.getRetrofit().create(RetrofitApi.class);
+
+        Call<FoodData> call = retrofitApi.getRecipes(newText,
+                AppConstants.APP_ID,
+                AppConstants.APP_KEY,
+                AppConstants.START_INDEX,
+                AppConstants.END_INDEX);
+
+        call.enqueue(new Callback<FoodData>() {
+            @Override
+            public void onResponse(Call<FoodData> call, Response<FoodData> response) {
+                FoodData foodData = response.body();
+                int dataSize = foodData.getHits().size();
+                List<FoodApiHits> foodApiHitsList = foodData.getHits();
+
+                CustomSearchAdapter customAdapter = new CustomSearchAdapter(foodApiHitsList, SearchActivity.this);
+
+                recyclerView.setAdapter(customAdapter);
+
+            }
+
+            @Override
+            public void onFailure(Call<FoodData> call, Throwable t) {
+                Toast.makeText(SearchActivity.this, "Retrofit Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        getDataFromApi(query);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 }
