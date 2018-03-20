@@ -35,20 +35,16 @@ public class CustomSliderAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        Log.v(TAG,"getCount called");
         return images.length;
     }
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        Log.v(TAG,"isViewFromObject called");
         return (view==(LinearLayout)object);
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-
-        Log.v(TAG,"instantiateItem called "+position);
 
             inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
            View myImageLayout = inflater.inflate(R.layout.image_slider, container, false);
@@ -62,7 +58,6 @@ public class CustomSliderAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        Log.v(TAG,"destroyItem called "+position);
         container.removeView((LinearLayout)object);
     }
 }

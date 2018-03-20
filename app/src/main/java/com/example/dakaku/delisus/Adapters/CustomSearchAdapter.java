@@ -14,15 +14,15 @@ import com.example.dakaku.delisus.R;
 
 import java.util.List;
 
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by dakaku on 19/3/18.
  */
 
-public class CustomSearchAdapter extends RecyclerView.Adapter<CustomSearchAdapter.MyHolder> {
+public class CustomSearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public List<FoodApiHits> foodApiHitsList;
+    private static final String TAG = "CustomSearchAdapter";
     Context context;
 
     public CustomSearchAdapter(List<FoodApiHits> foodApiHitsList, Context context) {
@@ -30,21 +30,21 @@ public class CustomSearchAdapter extends RecyclerView.Adapter<CustomSearchAdapte
         this.context = context;
     }
 
-    @Override
-    public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.rv_items,parent,false);
 
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view= LayoutInflater.from(context).inflate(R.layout.rv_items,parent,false);
         return new MyHolder(view);
 
     }
 
     @Override
-    public void onBindViewHolder(MyHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Recipe recipe=foodApiHitsList.get(position).getRecipe();
-         holder.textViewLabel.setText(recipe.getLabel());
+        Log.v(TAG,"TextView called");
+        ((MyHolder)holder).textViewLabel.setText(recipe.getLabel());
     }
-
-
 
     @Override
     public int getItemCount() {

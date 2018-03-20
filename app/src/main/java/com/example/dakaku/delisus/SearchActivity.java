@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,8 +17,6 @@ import com.example.dakaku.delisus.Network.RetrofitApi;
 import com.example.dakaku.delisus.Network.RetrofitClient;
 import com.example.dakaku.delisus.Pojo.FoodApiHits;
 import com.example.dakaku.delisus.Pojo.FoodData;
-import com.example.dakaku.delisus.Pojo.Recipe;
-import com.example.dakaku.delisus.ui.MainActivity;
 
 import java.util.List;
 
@@ -34,10 +31,10 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
     private static final String TAG = "SearchActivity";
 
     @BindView(R.id.search_view)
-     SearchView searchView;
+    SearchView searchView;
 
     @BindView(R.id.rv_searchActivity)
-     RecyclerView recyclerView;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
