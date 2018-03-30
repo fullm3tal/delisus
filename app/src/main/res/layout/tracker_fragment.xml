@@ -103,6 +103,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" + Add Food"
+                        android:id="@+id/button_addLunch"
                         app:layout_constraintTop_toBottomOf="@id/image_lunch" />
 
                 </android.support.constraint.ConstraintLayout>
@@ -151,6 +152,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" + Add Food"
+                        android:id="@+id/button_addDinner"
                         app:layout_constraintTop_toBottomOf="@id/image_dinner" />
 
                 </android.support.constraint.ConstraintLayout>

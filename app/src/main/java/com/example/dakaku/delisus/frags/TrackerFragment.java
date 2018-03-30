@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.dakaku.delisus.AppConstants;
 import com.example.dakaku.delisus.R;
 import com.example.dakaku.delisus.SearchActivity;
 
@@ -21,9 +22,14 @@ import butterknife.ButterKnife;
  * Created by dakaku on 16/2/18.
  */
 
-public class TrackerFragment extends Fragment {
+public class TrackerFragment extends Fragment implements View.OnClickListener{
 
     Button buttonAddBreakfast;
+    Button buttonAddLunch;
+    Button buttonAddDinner;
+    TextView textViewBreakfast;
+    TextView textViewLunch;
+    TextView textViewDinner;
 
     public TrackerFragment(){
 
@@ -38,15 +44,52 @@ public class TrackerFragment extends Fragment {
        View view=inflater.inflate(R.layout.tracker_fragment,container,false);
 
         buttonAddBreakfast=(Button)view.findViewById(R.id.button_addBreakfast);
-        buttonAddBreakfast.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(getActivity(), SearchActivity.class);
-                startActivity(intent);
-            }
-        });
+        buttonAddLunch=(Button)view.findViewById(R.id.button_addLunch);
+        buttonAddDinner=(Button)view.findViewById(R.id.button_addDinner);
+        buttonAddBreakfast=(Button)view.findViewById(R.id.button_addBreakfast);
+
+       textViewBreakfast=(TextView)view.findViewById(R.id.tv_breakfast);
+        textViewLunch=(TextView)view.findViewById(R.id.tv_lunch);
+        textViewDinner=(TextView)view.findViewById(R.id.tv_dinner);
+
+        buttonAddBreakfast.setOnClickListener(this);
+        buttonAddLunch.setOnClickListener(this);
+        buttonAddDinner.setOnClickListener(this);
 
         return view;
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        Intent intent;
+        String mealTitle;
+      switch (view.getId()){
+          case R.id.button_addBreakfast:
+              intent=new Intent(getActivity(), SearchActivity.class);
+              mealTitle=textViewBreakfast.getText().toString();
+              intent.putExtra(AppConstants.FOOD_TITLE,mealTitle);
+              startActivity(intent);
+              break;
+
+          case R.id.button_addLunch:
+              intent=new Intent(getActivity(), SearchActivity.class);
+              mealTitle=textViewLunch.getText().toString();
+              intent.putExtra(AppConstants.FOOD_TITLE,mealTitle);
+              startActivity(intent);
+              break;
+
+          case R.id.button_addDinner:
+              intent=new Intent(getActivity(), SearchActivity.class);
+              mealTitle=textViewDinner.getText().toString();
+              intent.putExtra(AppConstants.FOOD_TITLE,mealTitle);
+              startActivity(intent);
+              break;
+
+          default:
+              Log.v(TAG,"No button id found");
+
+      }
 
     }
 }

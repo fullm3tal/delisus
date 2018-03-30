@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dakaku.delisus.Adapters.CustomSearchAdapter;
@@ -36,12 +37,18 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
     @BindView(R.id.rv_searchActivity)
     RecyclerView recyclerView;
 
+    @BindView(R.id.text_meal)
+    TextView tv_mealTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
 
+
+        String textTitle =getIntent().getStringExtra(AppConstants.FOOD_TITLE);
+        tv_mealTitle.setText(textTitle);
         Toolbar toolbar = findViewById(R.id.app_searchBar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
