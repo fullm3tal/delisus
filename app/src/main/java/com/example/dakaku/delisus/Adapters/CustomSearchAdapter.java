@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.dakaku.delisus.Listeners.RVItemClick;
 import com.example.dakaku.delisus.Pojo.FoodApiHits;
 import com.example.dakaku.delisus.Pojo.Recipe;
 import com.example.dakaku.delisus.R;
@@ -24,10 +25,12 @@ public class CustomSearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public List<FoodApiHits> foodApiHitsList;
     private static final String TAG = "CustomSearchAdapter";
     Context context;
+    public RVItemClick rvItemClick;
 
-    public CustomSearchAdapter(List<FoodApiHits> foodApiHitsList, Context context) {
+    public CustomSearchAdapter(List<FoodApiHits> foodApiHitsList, Context context, RVItemClick mRVItemClick) {
         this.foodApiHitsList = foodApiHitsList;
         this.context = context;
+         rvItemClick=mRVItemClick;
     }
 
 
@@ -43,7 +46,10 @@ public class CustomSearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Recipe recipe=foodApiHitsList.get(position).getRecipe();
         Log.v(TAG,"TextView called");
+        String firstLetter=String.valueOf(recipe.getLabel().charAt(0));
         ((MyHolder)holder).textViewLabel.setText(recipe.getLabel());
+        ((MyHolder)holder).textViewFirstLetter.setText(firstLetter);
+        ((MyHolder)holder).textViewCalorie.setText(recipe.getCalories().toString());
     }
 
     @Override
@@ -51,13 +57,27 @@ public class CustomSearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return foodApiHitsList.size();
     }
 
-    public class MyHolder extends RecyclerView.ViewHolder{
+    public class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView textViewLabel;
+        public TextView textViewFirstLetter;
+        public TextView textViewCalorie;
+
 
         public MyHolder(View itemView) {
             super(itemView);
             textViewLabel=itemView.findViewById(R.id.tv_recipeLabel);
+            textViewFirstLetter=itemView.findViewById(R.id.tv_recipeFirstLetter);
+            textViewCalorie=itemView.findViewById(R.id.tv_recipeCalorie);
+            itemView.setOnClickListener(this);
+        }
+
+
+        @Override
+        public void onClick(View view) {
+            int adapterPosition=getAdapterPosition();
+            String labelName= foodApiHitsList.get(adapterPosition).getRecipe().getLabel().toString();
+            rvItemClick.onRecyclerItemClick(labelName);
         }
     }
 }

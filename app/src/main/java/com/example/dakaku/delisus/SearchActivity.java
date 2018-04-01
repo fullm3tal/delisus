@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dakaku.delisus.Adapters.CustomSearchAdapter;
+import com.example.dakaku.delisus.Listeners.RVItemClick;
 import com.example.dakaku.delisus.Network.RetrofitApi;
 import com.example.dakaku.delisus.Network.RetrofitClient;
 import com.example.dakaku.delisus.Pojo.FoodApiHits;
@@ -27,7 +28,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SearchActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class SearchActivity extends AppCompatActivity implements SearchView.OnQueryTextListener,RVItemClick {
 
     private static final String TAG = "SearchActivity";
 
@@ -104,7 +105,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
                 int dataSize = foodData.getHits().size();
                 List<FoodApiHits> foodApiHitsList = foodData.getHits();
 
-                CustomSearchAdapter customAdapter = new CustomSearchAdapter(foodApiHitsList, SearchActivity.this);
+                CustomSearchAdapter customAdapter = new CustomSearchAdapter(foodApiHitsList, SearchActivity.this, SearchActivity.this);
 
                 recyclerView.setAdapter(customAdapter);
 
@@ -127,5 +128,10 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
     @Override
     public boolean onQueryTextChange(String newText) {
         return false;
+    }
+
+    @Override
+    public void onRecyclerItemClick(String labelName) {
+        Toast.makeText(SearchActivity.this,labelName,Toast.LENGTH_SHORT ).show();
     }
 }
