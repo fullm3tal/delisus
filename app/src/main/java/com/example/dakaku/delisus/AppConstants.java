@@ -21,5 +21,7 @@ public class AppConstants {
 
     public static final Integer END_INDEX = 10;
 
-    public static final String FOOD_TITLE="food_title";
+    public static final String MEAL_TITLE="meal_title";
+
+    public static final String RECIPE_INTENT="recipe_intent";
 }

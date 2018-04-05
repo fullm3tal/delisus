@@ -12,11 +12,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.dakaku.delisus.AppConstants;
+import com.example.dakaku.delisus.Pojo.Recipe;
 import com.example.dakaku.delisus.R;
 import com.example.dakaku.delisus.SearchActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by dakaku on 16/2/18.
@@ -68,21 +71,21 @@ public class TrackerFragment extends Fragment implements View.OnClickListener{
           case R.id.button_addBreakfast:
               intent=new Intent(getActivity(), SearchActivity.class);
               mealTitle=textViewBreakfast.getText().toString();
-              intent.putExtra(AppConstants.FOOD_TITLE,mealTitle);
+              intent.putExtra(AppConstants.MEAL_TITLE,mealTitle);
               startActivity(intent);
               break;
 
           case R.id.button_addLunch:
               intent=new Intent(getActivity(), SearchActivity.class);
               mealTitle=textViewLunch.getText().toString();
-              intent.putExtra(AppConstants.FOOD_TITLE,mealTitle);
+              intent.putExtra(AppConstants.MEAL_TITLE,mealTitle);
               startActivity(intent);
               break;
 
           case R.id.button_addDinner:
               intent=new Intent(getActivity(), SearchActivity.class);
               mealTitle=textViewDinner.getText().toString();
-              intent.putExtra(AppConstants.FOOD_TITLE,mealTitle);
+              intent.putExtra(AppConstants.MEAL_TITLE,mealTitle);
               startActivity(intent);
               break;
 
@@ -91,5 +94,17 @@ public class TrackerFragment extends Fragment implements View.OnClickListener{
 
       }
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1){
+            if (resultCode==RESULT_OK){
+                Recipe recipe= data.getParcelableExtra(AppConstants.RECIPE_INTENT);
+                Log.v(TAG,recipe.getLabel());
+
+            }
+        }
     }
 }

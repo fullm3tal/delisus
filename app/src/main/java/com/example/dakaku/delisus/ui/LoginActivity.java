@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @BindView(R.id.editText_password)
     EditText editTextPassword;
 
+    @BindView(R.id.bt_guestLogin)
+    Button buttonGuestLogin;
+
     FirebaseAuth mFirebaseAuth;
 
     @Override
@@ -47,6 +51,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mFirebaseAuth = FirebaseAuth.getInstance();
         textViewSignUp.setOnClickListener(this);
         textViewSignIn.setOnClickListener(this);
+        buttonGuestLogin.setOnClickListener(this);
 
     }
 
@@ -81,6 +86,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                if(TextUtils.isEmpty(editTextPassword.getText().toString())){
                    editTextPassword.setError("Please enter a password");
                }
+                break;
+
+            case R.id.bt_guestLogin:
+                signInIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                startActivity(signInIntent);
+                finish();
                 break;
 
             default:

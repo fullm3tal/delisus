@@ -1,5 +1,8 @@
 package com.example.dakaku.delisus.Pojo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -9,7 +12,7 @@ import java.util.List;
  * Created by dakaku on 17/3/18.
  */
 
-public class Recipe {
+public class Recipe implements Parcelable {
 
     @SerializedName("uri")
     @Expose
@@ -70,6 +73,84 @@ public class Recipe {
     @SerializedName("digest")
     @Expose
     private List<Digest> digest = null;
+
+
+    protected Recipe(Parcel in) {
+        uri = in.readString();
+        label = in.readString();
+        image = in.readString();
+        source = in.readString();
+        url = in.readString();
+        shareAs = in.readString();
+        if (in.readByte() == 0) {
+            yield = null;
+        } else {
+            yield = in.readFloat();
+        }
+        dietLabels = in.createStringArrayList();
+        healthLabels = in.createStringArrayList();
+        if (in.readByte() == 0) {
+            calories = null;
+        } else {
+            calories = in.readFloat();
+        }
+        if (in.readByte() == 0) {
+            totalWeight = null;
+        } else {
+            totalWeight = in.readFloat();
+        }
+        totalNutrients = in.readParcelable(TotalNutrients.class.getClassLoader());
+        totalDaily = in.readParcelable(TotalDaily.class.getClassLoader());
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(uri);
+        dest.writeString(label);
+        dest.writeString(image);
+        dest.writeString(source);
+        dest.writeString(url);
+        dest.writeString(shareAs);
+        if (yield == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeFloat(yield);
+        }
+        dest.writeStringList(dietLabels);
+        dest.writeStringList(healthLabels);
+        if (calories == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeFloat(calories);
+        }
+        if (totalWeight == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeFloat(totalWeight);
+        }
+        dest.writeParcelable(totalNutrients, flags);
+        dest.writeParcelable(totalDaily, flags);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Recipe> CREATOR = new Creator<Recipe>() {
+        @Override
+        public Recipe createFromParcel(Parcel in) {
+            return new Recipe(in);
+        }
+
+        @Override
+        public Recipe[] newArray(int size) {
+            return new Recipe[size];
+        }
+    };
 
     public String getUri() {
         return uri;

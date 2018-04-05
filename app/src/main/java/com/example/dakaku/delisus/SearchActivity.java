@@ -19,6 +19,8 @@ import com.example.dakaku.delisus.Network.RetrofitApi;
 import com.example.dakaku.delisus.Network.RetrofitClient;
 import com.example.dakaku.delisus.Pojo.FoodApiHits;
 import com.example.dakaku.delisus.Pojo.FoodData;
+import com.example.dakaku.delisus.Pojo.Recipe;
+import com.example.dakaku.delisus.ui.RecipeActivity;
 
 import java.util.List;
 
@@ -48,7 +50,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         ButterKnife.bind(this);
 
 
-        String textTitle =getIntent().getStringExtra(AppConstants.FOOD_TITLE);
+        String textTitle =getIntent().getStringExtra(AppConstants.MEAL_TITLE);
         tv_mealTitle.setText(textTitle);
         Toolbar toolbar = findViewById(R.id.app_searchBar);
         setSupportActionBar(toolbar);
@@ -131,7 +133,9 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
     }
 
     @Override
-    public void onRecyclerItemClick(String labelName) {
-        Toast.makeText(SearchActivity.this,labelName,Toast.LENGTH_SHORT ).show();
+    public void onRecyclerItemClick(Recipe recipe) {
+        Intent intent=new Intent(SearchActivity.this, RecipeActivity.class);
+        intent.putExtra(AppConstants.RECIPE_INTENT,recipe);
+        startActivity(intent);
     }
 }

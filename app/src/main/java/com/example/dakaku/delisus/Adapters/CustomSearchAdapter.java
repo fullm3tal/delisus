@@ -76,8 +76,8 @@ public class CustomSearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         @Override
         public void onClick(View view) {
             int adapterPosition=getAdapterPosition();
-            String labelName= foodApiHitsList.get(adapterPosition).getRecipe().getLabel().toString();
-            rvItemClick.onRecyclerItemClick(labelName);
+            Recipe mRecipe= foodApiHitsList.get(adapterPosition).getRecipe();
+            rvItemClick.onRecyclerItemClick(mRecipe);
         }
     }
 }

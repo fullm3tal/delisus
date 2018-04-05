@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.dakaku.delisus.ui.RecipeActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:elevation="5dp">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <include
+                android:id="@+id/layout_recipeBar"
+                layout="@layout/app_bar"
+                app:layout_collapseMode="pin"/>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_dishName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:hint="Food name"
+                    android:textColor="@color/colorWhite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="36dp"
+        android:id="@+id/fab"
+        app:layout_anchor="@+id/appBarLayout"
+        app:layout_anchorGravity="right|bottom"
+        android:src="@drawable/ic_done_white_24dp"/>
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="30dp"
+            android:entries="@array/spinner_list" />
+
+        <TextView
+            android:id="@+id/tv_dishEnergyLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Energy"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/spinner" />
+
+        <TextView
+            android:id="@+id/tv_dishEnergyId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Energy"
+            app:layout_constraintLeft_toLeftOf="@id/guideline"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner" />
+
+        <TextView
+            android:id="@+id/tv_dishFatLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Fat"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/tv_dishEnergyLabel" />
+
+        <TextView
+            android:id="@+id/tv_dishFatId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Fat"
+            app:layout_constraintLeft_toLeftOf="@id/guideline"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_dishEnergyId" />
+
+        <TextView
+            android:id="@+id/tv_dishCarbsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Carbs"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/tv_dishFatLabel" />
+
+        <TextView
+            android:id="@+id/tv_dishCarbsId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Carbs"
+            app:layout_constraintLeft_toLeftOf="@id/guideline"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_dishFatId" />
+
+        <TextView
+            android:id="@+id/tv_dishFiberLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Fiber"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/tv_dishCarbsLabel" />
+
+        <TextView
+            android:id="@+id/tv_dishFiberId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Fiber"
+            app:layout_constraintLeft_toLeftOf="@id/guideline"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_dishCarbsId" />
+
+
+        <TextView
+            android:id="@+id/tv_dishSugarLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Sugar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/tv_dishFiberLabel" />
+
+        <TextView
+            android:id="@+id/tv_dishSugarId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Sugar"
+            app:layout_constraintLeft_toLeftOf="@id/guideline"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_dishFiberId" />
+
+
+        <TextView
+            android:id="@+id/tv_dishProteinLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Protein"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/tv_dishSugarLabel" />
+
+        <TextView
+            android:id="@+id/tv_dishProteinId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Protein"
+            app:layout_constraintLeft_toLeftOf="@id/guideline"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_dishSugarId" />
+
+        <TextView
+            android:id="@+id/tv_dishCholesterolLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Cholesterol"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/tv_dishProteinLabel" />
+
+        <TextView
+            android:id="@+id/tv_dishCholesterolId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Cholesterol"
+            app:layout_constraintLeft_toLeftOf="@id/guideline"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_dishProteinId" />
+
+
+        <TextView
+            android:id="@+id/tv_dishCalciumLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Calcium"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/tv_dishCholesterolLabel" />
+
+        <TextView
+            android:id="@+id/tv_dishCalciumId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Calcium"
+            app:layout_constraintLeft_toLeftOf="@id/guideline"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_dishCholesterolId" />
+
+
+        <TextView
+            android:id="@+id/tv_dishIronLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Iron"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/tv_dishCalciumLabel" />
+
+        <TextView
+            android:id="@+id/tv_dishIronId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Iron"
+            app:layout_constraintLeft_toLeftOf="@id/guideline"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_dishCalciumId" />
+
+
+        <TextView
+            android:id="@+id/tv_dishZincLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Zinc"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/tv_dishIronLabel" />
+
+        <TextView
+            android:id="@+id/tv_dishZincId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Zinc"
+            app:layout_constraintLeft_toLeftOf="@id/guideline"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_dishIronId" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>
