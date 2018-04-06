@@ -24,4 +24,8 @@ public class AppConstants {
     public static final String MEAL_TITLE="meal_title";
 
     public static final String RECIPE_INTENT="recipe_intent";
+
+    public static final String MEAL_REFERENCE="Meals";
+
+    public static final String FIREBASE_USERS="Users";
 }

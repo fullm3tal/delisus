@@ -152,6 +152,9 @@ public class TotalNutrients implements Parcelable {
         vITK1 = in.readParcelable(DietMeasurement.class.getClassLoader());
     }
 
+    public TotalNutrients() {
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeParcelable(eNERCKCAL, flags);

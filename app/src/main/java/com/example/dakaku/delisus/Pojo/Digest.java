@@ -32,6 +32,9 @@ public class Digest {
     @Expose
     private String unit;
 
+    public Digest() {
+    }
+
     public String getLabel() {
         return label;
     }

@@ -14,6 +14,9 @@ import java.util.List;
 
 public class Recipe implements Parcelable {
 
+    public Recipe() {
+    }
+
     @SerializedName("uri")
     @Expose
     private String uri;

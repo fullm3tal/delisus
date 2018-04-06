@@ -37,6 +37,9 @@ public class DietMeasurement implements Parcelable {
         return unit;
     }
 
+    public DietMeasurement() {
+    }
+
     protected DietMeasurement(Parcel in) {
         label = in.readString();
         if (in.readByte() == 0) {

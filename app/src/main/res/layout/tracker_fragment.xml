@@ -57,6 +57,16 @@
                         android:id="@+id/button_addBreakfast"
                         app:layout_constraintTop_toBottomOf="@id/image_breakfast" />
 
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/button_addBreakfast"
+                        android:id="@+id/rv_addBreakfast"
+                        app:layout_constraintLeft_toLeftOf="parent"/>
+
+
                 </android.support.constraint.ConstraintLayout>
 
             </android.support.v7.widget.CardView>
@@ -106,6 +116,15 @@
                         android:id="@+id/button_addLunch"
                         app:layout_constraintTop_toBottomOf="@id/image_lunch" />
 
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/button_addLunch"
+                        android:id="@+id/rv_addLunch"
+                        app:layout_constraintLeft_toLeftOf="parent"/>
+
                 </android.support.constraint.ConstraintLayout>
 
             </android.support.v7.widget.CardView>
@@ -154,6 +173,15 @@
                         android:text=" + Add Food"
                         android:id="@+id/button_addDinner"
                         app:layout_constraintTop_toBottomOf="@id/image_dinner" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/button_addDinner"
+                        android:id="@+id/rv_addDinner"
+                        app:layout_constraintLeft_toLeftOf="parent"/>
 
                 </android.support.constraint.ConstraintLayout>
 

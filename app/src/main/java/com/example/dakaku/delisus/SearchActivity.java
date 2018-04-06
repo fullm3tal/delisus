@@ -43,6 +43,8 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
     @BindView(R.id.text_meal)
     TextView tv_mealTitle;
 
+    String textMealTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +52,8 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         ButterKnife.bind(this);
 
 
-        String textTitle =getIntent().getStringExtra(AppConstants.MEAL_TITLE);
-        tv_mealTitle.setText(textTitle);
+        textMealTitle =getIntent().getStringExtra(AppConstants.MEAL_TITLE);
+        tv_mealTitle.setText(textMealTitle);
         Toolbar toolbar = findViewById(R.id.app_searchBar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
@@ -136,6 +138,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
     public void onRecyclerItemClick(Recipe recipe) {
         Intent intent=new Intent(SearchActivity.this, RecipeActivity.class);
         intent.putExtra(AppConstants.RECIPE_INTENT,recipe);
+        intent.putExtra(AppConstants.MEAL_TITLE,textMealTitle);
         startActivity(intent);
     }
 }

@@ -19,6 +19,9 @@ public class FoodApiHits {
         @Expose
         private Boolean bought;
 
+    public FoodApiHits() {
+    }
+
     public Recipe getRecipe() {
         return recipe;
     }

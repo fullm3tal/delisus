@@ -35,6 +35,9 @@ public class FoodData {
         @Expose
         private List<FoodApiHits> hits = null;
 
+    public FoodData() {
+    }
+
     public String getQ() {
         return q;
     }

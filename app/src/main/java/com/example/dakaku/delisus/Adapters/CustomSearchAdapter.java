@@ -33,13 +33,10 @@ public class CustomSearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
          rvItemClick=mRVItemClick;
     }
 
-
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(context).inflate(R.layout.rv_items,parent,false);
         return new MyHolder(view);
-
     }
 
     @Override
@@ -63,7 +60,6 @@ public class CustomSearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public TextView textViewFirstLetter;
         public TextView textViewCalorie;
 
-
         public MyHolder(View itemView) {
             super(itemView);
             textViewLabel=itemView.findViewById(R.id.tv_recipeLabel);
@@ -71,7 +67,6 @@ public class CustomSearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             textViewCalorie=itemView.findViewById(R.id.tv_recipeCalorie);
             itemView.setOnClickListener(this);
         }
-
 
         @Override
         public void onClick(View view) {

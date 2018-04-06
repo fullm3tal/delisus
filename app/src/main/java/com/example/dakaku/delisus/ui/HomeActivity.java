@@ -76,11 +76,11 @@ public class HomeActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                                 startActivity(intent);
+//                                FirebaseAuth.getInstance().signOut();
                                 finish();
                             }
                         }).setNegativeButton(R.string.sign_out_no, null).create().show();
                 return true;
-
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -91,14 +91,13 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        //                Creating a Dialog box for providing options to customer while pressing back button
-
         new AlertDialog.Builder(this).setMessage("Do you really want to logout ?")
                 .setPositiveButton(R.string.sign_out_yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                         startActivity(intent);
+//                                FirebaseAuth.getInstance().signOut();
                         finish();
                     }
                 }).setNegativeButton(R.string.sign_out_no, null).create().show();

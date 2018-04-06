@@ -10,6 +10,8 @@ import com.google.gson.annotations.SerializedName;
  * Created by dakaku on 18/3/18.
  */
 public class TotalDaily implements Parcelable {
+    public TotalDaily() {
+    }
 
     @SerializedName("ENERC_KCAL")
     @Expose

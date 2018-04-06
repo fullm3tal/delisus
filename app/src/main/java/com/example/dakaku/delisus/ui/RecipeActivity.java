@@ -1,16 +1,19 @@
 package com.example.dakaku.delisus.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dakaku.delisus.AppConstants;
 import com.example.dakaku.delisus.Pojo.Recipe;
 import com.example.dakaku.delisus.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,6 +68,9 @@ public class RecipeActivity extends AppCompatActivity {
     @BindView(R.id.fab)
     FloatingActionButton dishFab;
 
+    DatabaseReference databaseRecipe;
+    FirebaseUser firebaseUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +79,10 @@ public class RecipeActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         final Recipe recipe = getIntent().getParcelableExtra(AppConstants.RECIPE_INTENT);
+        final String textMealTitle = getIntent().getStringExtra(AppConstants.MEAL_TITLE);
+
+        databaseRecipe = FirebaseDatabase.getInstance().getReference(AppConstants.FIREBASE_USERS);
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         tvDishName.setText(recipe.getLabel());
 
@@ -99,14 +109,23 @@ public class RecipeActivity extends AppCompatActivity {
         dishFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent();
-                intent.putExtra(AppConstants.RECIPE_INTENT,recipe);
-                setResult(RESULT_OK,intent);
-                finish();
+                setRecipe(recipe, textMealTitle);
             }
         });
 
     }
+
+    private void setRecipe(Recipe recipe, String mealTitle) {
+
+        if (!(firebaseUser.getUid()==null)) {
+            String id = firebaseUser.getUid();
+            String childKey = databaseRecipe.child(id).child(mealTitle).push().getKey();
+            databaseRecipe.child(id).child(mealTitle).child(childKey).setValue(recipe);
+            Toast.makeText(RecipeActivity.this, childKey + " added", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    }
+
 
     @Override
     public void onBackPressed() {
