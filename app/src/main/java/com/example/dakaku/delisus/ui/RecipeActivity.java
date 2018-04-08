@@ -117,11 +117,12 @@ public class RecipeActivity extends AppCompatActivity {
 
     private void setRecipe(Recipe recipe, String mealTitle) {
 
-        if (!(firebaseUser.getUid()==null)) {
+        if (!(firebaseUser.getUid() == null)) {
             String id = firebaseUser.getUid();
             String childKey = databaseRecipe.child(id).child(mealTitle).push().getKey();
-            databaseRecipe.child(id).child(mealTitle).child(childKey).setValue(recipe);
-            Toast.makeText(RecipeActivity.this, childKey + " added", Toast.LENGTH_SHORT).show();
+            RecipeData recipeData = new RecipeData(childKey, recipe, mealTitle);
+            databaseRecipe.child(id).child(mealTitle).child(childKey).setValue(recipeData);
+            Toast.makeText(RecipeActivity.this, recipe.getLabel() + " added", Toast.LENGTH_SHORT).show();
             finish();
         }
     }

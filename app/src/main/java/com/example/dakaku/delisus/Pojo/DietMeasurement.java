@@ -15,15 +15,21 @@ public class DietMeasurement implements Parcelable {
 
     @SerializedName("label")
     @Expose
-    private String label;
+    private String label=null;
 
     @SerializedName("quantity")
     @Expose
-    private Float quantity;
+    private Float quantity=0F;
 
     @SerializedName("unit")
     @Expose
-    private String unit;
+    private String unit=null;
+
+    public DietMeasurement() {
+        this.label = "";
+        this.quantity = 0F;
+        this.unit = "";
+    }
 
     public String getLabel() {
         return label;
@@ -37,8 +43,6 @@ public class DietMeasurement implements Parcelable {
         return unit;
     }
 
-    public DietMeasurement() {
-    }
 
     protected DietMeasurement(Parcel in) {
         label = in.readString();

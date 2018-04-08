@@ -30,7 +30,7 @@ public class CustomSearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public CustomSearchAdapter(List<FoodApiHits> foodApiHitsList, Context context, RVItemClick mRVItemClick) {
         this.foodApiHitsList = foodApiHitsList;
         this.context = context;
-         rvItemClick=mRVItemClick;
+         this.rvItemClick=mRVItemClick;
     }
 
     @Override
@@ -73,6 +73,7 @@ public class CustomSearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             int adapterPosition=getAdapterPosition();
             Recipe mRecipe= foodApiHitsList.get(adapterPosition).getRecipe();
             rvItemClick.onRecyclerItemClick(mRecipe);
+            Log.v(TAG,"Search Meal Clicked");
         }
     }
 }

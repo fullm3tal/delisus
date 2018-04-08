@@ -231,14 +231,23 @@ public class TotalNutrients implements Parcelable {
     }
 
     public DietMeasurement getcHOCDF() {
+        if(cHOCDF==null){
+            cHOCDF=getDummy();
+        }
         return cHOCDF;
     }
 
     public DietMeasurement getfIBTG() {
+        if(fIBTG==null){
+            fIBTG = getDummy();
+        }
         return fIBTG;
     }
 
     public DietMeasurement getsUGAR() {
+        if(sUGAR==null){
+            sUGAR=getDummy();
+        }
         return sUGAR;
     }
 
@@ -326,5 +335,9 @@ public class TotalNutrients implements Parcelable {
         return vITK1;
     }
 
+    public DietMeasurement getDummy(){
+        DietMeasurement dietMeasurement=new DietMeasurement();
+        return dietMeasurement;
+    }
 
 }
