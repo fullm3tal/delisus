@@ -179,7 +179,6 @@ public class TrackerFragment extends Fragment implements View.OnClickListener {
         recipeListMeal.remove(position);
         Log.v(TAG, mealTitle);
         mDatabaseReference.child(mealTitle).child(id).removeValue();
-        addDataToRecyclerViews();
         Toast.makeText(getActivity(), recipeData.getRecipe().getLabel() + " deleted", Toast.LENGTH_SHORT).show();
     }
 

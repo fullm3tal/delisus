@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -173,7 +174,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                                 mCurrentUser.updateProfile(userProfileChangeRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-
+                                        Toast.makeText(SignupActivity.this,"Username Added",Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
