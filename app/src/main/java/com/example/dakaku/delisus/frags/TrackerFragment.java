@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -60,6 +61,7 @@ public class TrackerFragment extends Fragment implements View.OnClickListener {
     RecyclerView rvBreakfast;
     RecyclerView rvLunch;
     RecyclerView rvDinner;
+
 
     public TrackerFragment() {
 
@@ -173,13 +175,23 @@ public class TrackerFragment extends Fragment implements View.OnClickListener {
     }
 
     private void deleteDataFromRecyclerView(int position, List<RecipeData> recipeListMeal) {
-        RecipeData recipeData = recipeListMeal.get(position);
+        final RecipeData recipeData = recipeListMeal.get(position);
         String id = recipeData.getChildKey();
-        String mealTitle = recipeData.getMealTitle();
+        final String mealTitle = recipeData.getMealTitle();
         recipeListMeal.remove(position);
         Log.v(TAG, mealTitle);
         mDatabaseReference.child(mealTitle).child(id).removeValue();
         Toast.makeText(getActivity(), recipeData.getRecipe().getLabel() + " deleted", Toast.LENGTH_SHORT).show();
+        Snackbar snackbar=Snackbar.make(getActivity().findViewById(R.id.coordinatorLayout),"Recipe deleted",Snackbar.LENGTH_LONG);
+        snackbar.setAction("UNDO", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "Snackbar Clicked",Toast.LENGTH_SHORT).show();
+                String childKey= recipeData.getChildKey();
+               mDatabaseReference.child(mealTitle).child(childKey).setValue(recipeData);
+            }
+        });
+        snackbar.show();
     }
 
     private void addDataToRecyclerViews() {
