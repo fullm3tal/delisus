@@ -10,7 +10,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,10 +21,15 @@ import android.widget.Toast;
 
 import com.example.dakaku.delisus.Adapters.CustomTrackerAdapter;
 import com.example.dakaku.delisus.AppConstants;
+import com.example.dakaku.delisus.Helpers.RecyclerItemClickHelper;
+import com.example.dakaku.delisus.Helpers.SimpleItemTouchHelper;
+import com.example.dakaku.delisus.Listeners.RVItemClick;
+import com.example.dakaku.delisus.Listeners.SimpleItemClickListener;
 import com.example.dakaku.delisus.Pojo.Recipe;
 import com.example.dakaku.delisus.R;
 import com.example.dakaku.delisus.SearchActivity;
-import com.example.dakaku.delisus.ui.RecipeData;
+import com.example.dakaku.delisus.ui.RecipeActivity;
+import com.example.dakaku.delisus.Pojo.RecipeData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -42,32 +49,25 @@ import static android.app.Activity.RESULT_OK;
 
 public class TrackerFragment extends Fragment implements View.OnClickListener {
 
+    private static final String TAG = "TrackerFragment";
     Button buttonAddBreakfast;
     Button buttonAddLunch;
     Button buttonAddDinner;
-
     TextView textViewBreakfast;
     TextView textViewLunch;
     TextView textViewDinner;
-
-    List<RecipeData> recipeListBreakfast;
-    List<RecipeData> recipeListLunch;
-    List<RecipeData> recipeListDinner;
-
-    FirebaseDatabase mFirebaseDatabase;
+    private List<RecipeData> recipeListBreakfast;
+    private List<RecipeData> recipeListLunch;
+    private List<RecipeData> recipeListDinner;
     DatabaseReference mDatabaseReference;
     FirebaseUser firebaseUser;
-
     RecyclerView rvBreakfast;
     RecyclerView rvLunch;
     RecyclerView rvDinner;
 
-
     public TrackerFragment() {
 
     }
-
-    private static final String TAG = "TrackerFragment";
 
     @Nullable
     @Override
@@ -75,30 +75,66 @@ public class TrackerFragment extends Fragment implements View.OnClickListener {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         String key = firebaseUser.getUid();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mFirebaseDatabase.getReference("Users/" + key);
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users/" + key);
 
         recipeListBreakfast = new ArrayList<>();
         recipeListDinner = new ArrayList<>();
         recipeListLunch = new ArrayList<>();
 
+        final View view = inflater.inflate(R.layout.tracker_fragment, container, false);
 
-        View view = inflater.inflate(R.layout.tracker_fragment, container, false);
+
         rvBreakfast = (RecyclerView) view.findViewById(R.id.rv_addBreakfast);
         rvBreakfast.setHasFixedSize(true);
+        rvBreakfast.setItemViewCacheSize(10);
+        rvBreakfast.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvBreakfast.addOnItemTouchListener(new RecyclerItemClickHelper(getActivity(), new SimpleItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Recipe recipe = getRecipeListBreakfast().get(position).getRecipe();
+                Intent intent = new Intent(getActivity(), RecipeActivity.class);
+                intent.putExtra(AppConstants.RECIPE_INTENT, recipe);
+                intent.putExtra(AppConstants.MEAL_TITLE, "NO_MEAL");
+                startActivity(intent);
+                Log.v(TAG, recipe + " Breakfast");
+                Toast.makeText(getActivity(), recipe.getLabel(), Toast.LENGTH_SHORT).show();
+            }
+        }));
 
 
         rvDinner = (RecyclerView) view.findViewById(R.id.rv_addDinner);
         rvDinner.setHasFixedSize(true);
-
+        rvDinner.setItemViewCacheSize(10);
+        rvDinner.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvDinner.addOnItemTouchListener(new RecyclerItemClickHelper(getActivity(), new SimpleItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Recipe recipe = getRecipeListDinner().get(position).getRecipe();
+                Intent intent = new Intent(getContext(), RecipeActivity.class);
+                intent.putExtra(AppConstants.RECIPE_INTENT, recipe);
+                intent.putExtra(AppConstants.MEAL_TITLE, "NO_MEAL");
+                startActivity(intent);
+                Log.v(TAG, recipe + " Dinner");
+                Toast.makeText(getActivity(), recipe.getLabel(), Toast.LENGTH_SHORT).show();
+            }
+        }));
 
         rvLunch = (RecyclerView) view.findViewById(R.id.rv_addLunch);
         rvLunch.setHasFixedSize(true);
-
-
-        rvBreakfast.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rvDinner.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvLunch.setItemViewCacheSize(10);
         rvLunch.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvLunch.addOnItemTouchListener(new RecyclerItemClickHelper(getActivity(), new SimpleItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Recipe recipe = getRecipeListLunch().get(position).getRecipe();
+                Intent intent = new Intent(getActivity(), RecipeActivity.class);
+                intent.putExtra(AppConstants.RECIPE_INTENT, recipe);
+                intent.putExtra(AppConstants.MEAL_TITLE, "NO_MEAL");
+                startActivity(intent);
+                Log.v(TAG, recipe.getLabel() + " Lunch");
+                Toast.makeText(getActivity(), recipe.getLabel(), Toast.LENGTH_SHORT).show();
+            }
+        }));
 
         addDataToRecyclerViews();
 
@@ -115,10 +151,11 @@ public class TrackerFragment extends Fragment implements View.OnClickListener {
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
 
-                deleteDataFromRecyclerView(position, recipeListBreakfast);
+                deleteDataFromRecyclerView(position, getRecipeListBreakfast());
 
             }
         };
+
         ItemTouchHelper breakfastTouchHelper = new ItemTouchHelper(breakfastHelper);
         breakfastTouchHelper.attachToRecyclerView(rvBreakfast);
 
@@ -132,10 +169,11 @@ public class TrackerFragment extends Fragment implements View.OnClickListener {
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
 
-                deleteDataFromRecyclerView(position, recipeListLunch);
+                deleteDataFromRecyclerView(position, getRecipeListLunch());
 
             }
         };
+
         ItemTouchHelper lunchTouchHelper = new ItemTouchHelper(lunchHelper);
         lunchTouchHelper.attachToRecyclerView(rvLunch);
 
@@ -149,13 +187,13 @@ public class TrackerFragment extends Fragment implements View.OnClickListener {
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
 
-                deleteDataFromRecyclerView(position, recipeListDinner);
+                deleteDataFromRecyclerView(position, getRecipeListDinner());
 
             }
         };
+
         ItemTouchHelper dinnerTouchHelper = new ItemTouchHelper(dinnerHelper);
         dinnerTouchHelper.attachToRecyclerView(rvDinner);
-
 
         buttonAddBreakfast = (Button) view.findViewById(R.id.button_addBreakfast);
         buttonAddLunch = (Button) view.findViewById(R.id.button_addLunch);
@@ -182,13 +220,12 @@ public class TrackerFragment extends Fragment implements View.OnClickListener {
         Log.v(TAG, mealTitle);
         mDatabaseReference.child(mealTitle).child(id).removeValue();
         Toast.makeText(getActivity(), recipeData.getRecipe().getLabel() + " deleted", Toast.LENGTH_SHORT).show();
-        Snackbar snackbar=Snackbar.make(getActivity().findViewById(R.id.coordinatorLayout),"Recipe deleted",Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(getActivity().findViewById(R.id.coordinatorLayout), "Recipe deleted", Snackbar.LENGTH_LONG);
         snackbar.setAction("UNDO", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Snackbar Clicked",Toast.LENGTH_SHORT).show();
-                String childKey= recipeData.getChildKey();
-               mDatabaseReference.child(mealTitle).child(childKey).setValue(recipeData);
+                String childKey = recipeData.getChildKey();
+                mDatabaseReference.child(mealTitle).child(childKey).setValue(recipeData);
             }
         });
         snackbar.show();
@@ -211,8 +248,8 @@ public class TrackerFragment extends Fragment implements View.OnClickListener {
                         recipeListBreakfast.add(snapshot.getValue(RecipeData.class));
                     }
                     CustomTrackerAdapter adapter = new CustomTrackerAdapter(recipeListBreakfast, context);
-                    adapter.notifyDataSetChanged();
                     rvBreakfast.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
                 }
 
                 if (!(dataSnapshot.child("Lunch").getChildren() == null)) {
@@ -220,8 +257,8 @@ public class TrackerFragment extends Fragment implements View.OnClickListener {
                         recipeListLunch.add(snapshot.getValue(RecipeData.class));
                     }
                     CustomTrackerAdapter adapter = new CustomTrackerAdapter(recipeListLunch, context);
-                    adapter.notifyDataSetChanged();
                     rvLunch.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
                 }
 
                 if (!(dataSnapshot.child("Dinner").getChildren() == null)) {
@@ -229,8 +266,8 @@ public class TrackerFragment extends Fragment implements View.OnClickListener {
                         recipeListDinner.add(snapshot.getValue(RecipeData.class));
                     }
                     CustomTrackerAdapter adapter = new CustomTrackerAdapter(recipeListDinner, context);
-                    adapter.notifyDataSetChanged();
                     rvDinner.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
                 }
             }
 
@@ -285,4 +322,15 @@ public class TrackerFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    public List<RecipeData> getRecipeListBreakfast() {
+        return recipeListBreakfast;
+    }
+
+    public List<RecipeData> getRecipeListLunch() {
+        return recipeListLunch;
+    }
+
+    public List<RecipeData> getRecipeListDinner() {
+        return recipeListDinner;
+    }
 }

@@ -252,86 +252,149 @@ public class TotalNutrients implements Parcelable {
     }
 
     public DietMeasurement getpROCNT() {
+        if(pROCNT==null){
+            pROCNT=getDummy();
+        }
         return pROCNT;
     }
 
     public DietMeasurement getcHOLE() {
+        if (cHOLE==null){
+            cHOLE=getDummy();
+        }
         return cHOLE;
     }
 
     public DietMeasurement getnA() {
+        if(nA==null){
+            nA=getDummy();
+        }
         return nA;
     }
 
     public DietMeasurement getcA() {
+        if (cA==null){
+            cA=getDummy();
+        }
         return cA;
     }
 
     public DietMeasurement getmG() {
+        if (mG==null){
+            mG=getDummy();
+        }
         return mG;
     }
 
     public DietMeasurement getK() {
+        if (k==null){
+            k=getDummy();
+        }
         return k;
     }
 
     public DietMeasurement getfE() {
+        if (fE==null){
+            fE=getDummy();
+        }
         return fE;
     }
 
     public DietMeasurement getzN() {
+        if (zN==null){
+            zN=getDummy();
+        }
         return zN;
     }
 
     public DietMeasurement getP() {
+        if (p==null){
+            p=getDummy();
+        }
         return p;
     }
 
     public DietMeasurement getvITARAE() {
+        if (vITARAE==null){
+            vITARAE=getDummy();
+        }
         return vITARAE;
     }
 
     public DietMeasurement getvITC() {
+        if (vITC==null){
+            vITC=getDummy();
+        }
         return vITC;
     }
 
     public DietMeasurement gettHIA() {
+        if (tHIA==null){
+            tHIA=getDummy();
+        }
         return tHIA;
     }
 
     public DietMeasurement getrIBF() {
+        if (rIBF==null){
+            rIBF=getDummy();
+        }
         return rIBF;
     }
 
     public DietMeasurement getnIA() {
+        if (nIA==null){
+            nIA=getDummy();
+        }
         return nIA;
     }
 
     public DietMeasurement getvITB6A() {
+        if (vITB6A==null){
+            vITB6A=getDummy();
+        }
         return vITB6A;
     }
 
     public DietMeasurement getfOLDFE() {
+        if (fOLDFE==null){
+            fOLDFE=getDummy();
+        }
         return fOLDFE;
     }
 
     public DietMeasurement getfOLFD() {
+        if (fOLFD==null){
+            fOLFD=getDummy();
+        }
         return fOLFD;
     }
 
     public DietMeasurement getvITB12() {
+        if (vITB12==null){
+            vITB12=getDummy();
+        }
         return vITB12;
     }
 
     public DietMeasurement getvITD() {
+        if (vITD==null){
+            vITD=getDummy();
+        }
         return vITD;
     }
 
     public DietMeasurement gettOCPHA() {
+        if (tOCPHA==null){
+            tOCPHA=getDummy();
+        }
         return tOCPHA;
     }
 
     public DietMeasurement getvITK1() {
+        if (vITK1==null){
+            vITK1=getDummy();
+        }
         return vITK1;
     }
 

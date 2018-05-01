@@ -1,4 +1,4 @@
-package com.example.dakaku.delisus.ui;
+package com.example.dakaku.delisus.Pojo;
 
 import com.example.dakaku.delisus.Pojo.Recipe;
 

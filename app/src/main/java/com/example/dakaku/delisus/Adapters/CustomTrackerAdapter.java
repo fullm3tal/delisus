@@ -2,16 +2,17 @@ package com.example.dakaku.delisus.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.dakaku.delisus.Listeners.MealClickListener;
 import com.example.dakaku.delisus.Pojo.Recipe;
 import com.example.dakaku.delisus.R;
-import com.example.dakaku.delisus.ui.RecipeData;
+import com.example.dakaku.delisus.Pojo.RecipeData;
+
 
 import java.util.List;
 
@@ -29,7 +30,6 @@ public class CustomTrackerAdapter extends RecyclerView.Adapter<RecyclerView.View
     public CustomTrackerAdapter(List<RecipeData> recipeList, Context context) {
         this.recipeList = recipeList;
         this.context = context;
-
     }
 
     @Override
@@ -42,8 +42,8 @@ public class CustomTrackerAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        RecipeData recipeData=recipeList.get(position);
-        Recipe recipe=recipeData.getRecipe();
+        RecipeData recipeData = recipeList.get(position);
+        Recipe recipe = recipeData.getRecipe();
 
         String letter = String.valueOf(recipe.getLabel().charAt(0));
         ((NewHolder) holder).tvFirstLetter.setText(letter);
@@ -56,7 +56,8 @@ public class CustomTrackerAdapter extends RecyclerView.Adapter<RecyclerView.View
         return recipeList.size();
     }
 
-    public class NewHolder extends RecyclerView.ViewHolder {
+
+    public class NewHolder extends RecyclerView.ViewHolder implements View.OnTouchListener{
         public TextView tvFirstLetter;
         public TextView tvCalorie;
         public TextView tvLabel;
@@ -66,7 +67,12 @@ public class CustomTrackerAdapter extends RecyclerView.Adapter<RecyclerView.View
             tvFirstLetter = itemView.findViewById(R.id.tv_recipeFirstLetter);
             tvCalorie = itemView.findViewById(R.id.tv_recipeCalorie);
             tvLabel = itemView.findViewById(R.id.tv_recipeLabel);
+        }
 
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            int position= getAdapterPosition();
+            return false;
         }
     }
 }
