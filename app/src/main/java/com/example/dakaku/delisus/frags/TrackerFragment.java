@@ -83,11 +83,11 @@ public class TrackerFragment extends Fragment implements View.OnClickListener {
 
         final View view = inflater.inflate(R.layout.tracker_fragment, container, false);
 
-
         rvBreakfast = (RecyclerView) view.findViewById(R.id.rv_addBreakfast);
         rvBreakfast.setHasFixedSize(true);
         rvBreakfast.setItemViewCacheSize(10);
         rvBreakfast.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         rvBreakfast.addOnItemTouchListener(new RecyclerItemClickHelper(getActivity(), new SimpleItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -97,7 +97,6 @@ public class TrackerFragment extends Fragment implements View.OnClickListener {
                 intent.putExtra(AppConstants.MEAL_TITLE, "NO_MEAL");
                 startActivity(intent);
                 Log.v(TAG, recipe + " Breakfast");
-                Toast.makeText(getActivity(), recipe.getLabel(), Toast.LENGTH_SHORT).show();
             }
         }));
 
@@ -115,7 +114,6 @@ public class TrackerFragment extends Fragment implements View.OnClickListener {
                 intent.putExtra(AppConstants.MEAL_TITLE, "NO_MEAL");
                 startActivity(intent);
                 Log.v(TAG, recipe + " Dinner");
-                Toast.makeText(getActivity(), recipe.getLabel(), Toast.LENGTH_SHORT).show();
             }
         }));
 
@@ -132,7 +130,6 @@ public class TrackerFragment extends Fragment implements View.OnClickListener {
                 intent.putExtra(AppConstants.MEAL_TITLE, "NO_MEAL");
                 startActivity(intent);
                 Log.v(TAG, recipe.getLabel() + " Lunch");
-                Toast.makeText(getActivity(), recipe.getLabel(), Toast.LENGTH_SHORT).show();
             }
         }));
 

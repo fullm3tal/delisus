@@ -17,11 +17,11 @@ public class RecyclerItemClickHelper implements RecyclerView.OnItemTouchListener
     public RecyclerItemClickHelper(Context context, SimpleItemClickListener simpleItemClickListener) {
         mSimpleItemClickListener = simpleItemClickListener;
         mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
-
             @Override
-            public boolean onDoubleTapEvent(MotionEvent e) {
+            public boolean onSingleTapUp(MotionEvent e) {
                 return true;
             }
+
         });
     }
 
