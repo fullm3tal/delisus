@@ -9,9 +9,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.dakaku.delisus.AppConstants;
-import com.example.dakaku.delisus.Pojo.Recipe;
-import com.example.dakaku.delisus.Pojo.RecipeData;
+import com.example.dakaku.delisus.utils.AppConstants;
+import com.example.dakaku.delisus.pojo.Recipe;
+import com.example.dakaku.delisus.pojo.RecipeData;
 import com.example.dakaku.delisus.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,7 +25,6 @@ public class RecipeActivity extends AppCompatActivity {
 
     private static final String TAG = "RecipeActivity";
 
-
     @BindView(R.id.spinner)
     Spinner spinner;
 
@@ -35,38 +34,29 @@ public class RecipeActivity extends AppCompatActivity {
     @BindView(R.id.tv_dishEnergyId)
     TextView tvEnergy;
 
-
     @BindView(R.id.tv_dishCalciumId)
     TextView tvCalcium;
-
 
     @BindView(R.id.tv_dishCholesterolId)
     TextView tvCholesterol;
 
-
     @BindView(R.id.tv_dishProteinId)
     TextView tvProtein;
-
 
     @BindView(R.id.tv_dishZincId)
     TextView tvZinc;
 
-
     @BindView(R.id.tv_dishIronId)
     TextView tvIron;
-
 
     @BindView(R.id.tv_dishSugarId)
     TextView tvSugar;
 
-
     @BindView(R.id.tv_dishCarbsId)
     TextView tvCarbs;
 
-
     @BindView(R.id.tv_dishFatId)
     TextView tvFat;
-
 
     @BindView(R.id.tv_dishFiberId)
     TextView tvFiber;
@@ -75,6 +65,7 @@ public class RecipeActivity extends AppCompatActivity {
     FloatingActionButton dishFab;
 
     DatabaseReference databaseRecipe;
+
     FirebaseUser firebaseUser;
 
 
@@ -153,7 +144,6 @@ public class RecipeActivity extends AppCompatActivity {
 
         }
     }
-
 
     @Override
     public void onBackPressed() {

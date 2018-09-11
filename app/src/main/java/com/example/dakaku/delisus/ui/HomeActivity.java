@@ -7,19 +7,22 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 
-import com.example.dakaku.delisus.Adapters.CustomFragmentAdapter;
+import com.example.dakaku.delisus.adapters.CustomFragmentAdapter;
 import com.example.dakaku.delisus.R;
-import com.example.dakaku.delisus.frags.FavoriteFragment;
-import com.example.dakaku.delisus.frags.NewsFragment;
-import com.example.dakaku.delisus.frags.TrackerFragment;
+import com.example.dakaku.delisus.base.BaseActivity;
+import com.example.dakaku.delisus.fragments.FavoriteFragment;
+import com.example.dakaku.delisus.fragments.NewsFragment;
+import com.example.dakaku.delisus.fragments.TrackerFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends BaseActivity {
 
     private static final String TAG = "HomeActivity";
     FirebaseUser mFirebaseUser;
@@ -103,4 +106,9 @@ public class HomeActivity extends AppCompatActivity {
                 }).setNegativeButton(R.string.sign_out_no, null).create().show();
     }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        Log.v(TAG,"dispatchTouchEvent called");
+        return super.dispatchTouchEvent(ev);
+    }
 }

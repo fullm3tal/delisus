@@ -13,14 +13,15 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.dakaku.delisus.Adapters.CustomSearchAdapter;
-import com.example.dakaku.delisus.Listeners.RVItemClick;
-import com.example.dakaku.delisus.Network.RetrofitApi;
-import com.example.dakaku.delisus.Network.RetrofitClient;
-import com.example.dakaku.delisus.Pojo.FoodApiHits;
-import com.example.dakaku.delisus.Pojo.FoodData;
-import com.example.dakaku.delisus.Pojo.Recipe;
+import com.example.dakaku.delisus.adapters.CustomSearchAdapter;
+import com.example.dakaku.delisus.listeners.RVItemClick;
+import com.example.dakaku.delisus.network.RetrofitApi;
+import com.example.dakaku.delisus.network.RestClient;
+import com.example.dakaku.delisus.pojo.FoodApiHits;
+import com.example.dakaku.delisus.pojo.FoodData;
+import com.example.dakaku.delisus.pojo.Recipe;
 import com.example.dakaku.delisus.ui.RecipeActivity;
+import com.example.dakaku.delisus.utils.AppConstants;
 
 import java.util.List;
 
@@ -51,7 +52,6 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
 
-
         textMealTitle =getIntent().getStringExtra(AppConstants.MEAL_TITLE);
         tv_mealTitle.setText(textMealTitle);
         Toolbar toolbar = findViewById(R.id.app_searchBar);
@@ -66,6 +66,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         });
 
         recyclerView.setHasFixedSize(true);
+        recyclerView.setItemViewCacheSize(10);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
@@ -94,15 +95,11 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 
     public void getDataFromApi(String newText) {
 
-        RetrofitApi retrofitApi = RetrofitClient.getRetrofit().create(RetrofitApi.class);
-
-        Call<FoodData> call = retrofitApi.getRecipes(newText,
+        RestClient.getInstance().getRecipes(newText,
                 AppConstants.APP_ID,
                 AppConstants.APP_KEY,
                 AppConstants.START_INDEX,
-                AppConstants.END_INDEX);
-
-        call.enqueue(new Callback<FoodData>() {
+                AppConstants.END_INDEX).enqueue(new Callback<FoodData>() {
             @Override
             public void onResponse(Call<FoodData> call, Response<FoodData> response) {
                 FoodData foodData = response.body();
@@ -110,7 +107,6 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
                 List<FoodApiHits> foodApiHitsList = foodData.getHits();
 
                 CustomSearchAdapter customAdapter = new CustomSearchAdapter(foodApiHitsList, SearchActivity.this, SearchActivity.this);
-
                 recyclerView.setAdapter(customAdapter);
 
             }

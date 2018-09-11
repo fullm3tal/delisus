@@ -12,8 +12,9 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.dakaku.delisus.Adapters.CustomSliderAdapter;
+import com.example.dakaku.delisus.adapters.CustomSliderAdapter;
 import com.example.dakaku.delisus.R;
+import com.example.dakaku.delisus.base.BaseActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.relex.circleindicator.CircleIndicator;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     private static final String TAG = "MainActivity";
 
@@ -128,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             default:
                 Toast.makeText(MainActivity.this,"Invalid view", Toast.LENGTH_SHORT).show();
+                return;
         }
 
     }
